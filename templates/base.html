@@ -19,7 +19,7 @@
 
     {% if user.is_authenticated %}
 
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-2">
 
             <span class="text-white">
                 {{ user.username }}
@@ -35,20 +35,21 @@
                 </button>
             </form>
             {% else %}
+            <div class="d-flex align-items-center gap-2">
+              <a href="{% url 'login' %}"
+                 class="btn btn-outline-light btn-sm">
 
-            <a href="{% url 'login' %}"
-               class="btn btn-outline-light btn-sm">
+                 Connexion
 
-                Connexion
+             </a>
 
-            </a>
-
-            <a href="{% url 'inscription' %}"
-               class="btn btn-primary btn-sm">
+             <a href="{% url 'inscription' %}"
+                class="btn btn-primary btn-sm">
 
                 S'inscrire
 
-            </a>
+             </a>
+             </div>
 
 
         </div>
