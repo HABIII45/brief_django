@@ -9,4 +9,4 @@ def notification(sender,instance,created,**kwargs):
         utilisateur = instance.utilisateur
         categorie = instance.categorie
         titre = instance.titre
-    print(f' L utilisateur :{utilisateur} -- a ajouté une activité de type :{categorie} --  ayant comme titre:{titre}')
+        print(f' L utilisateur :{utilisateur} -- a ajouté une activité de type :{categorie} --  ayant comme titre:{titre}')

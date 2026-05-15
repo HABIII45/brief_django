@@ -16,6 +16,7 @@ class Entry(models.Model):
     utilisateur = models.ForeignKey(User,on_delete=models.CASCADE)
     description = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    date_modification = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='images/',null=True,blank=True)
     
     

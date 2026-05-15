@@ -34,16 +34,27 @@
                     Déconnexion
                 </button>
             </form>
+            {% else %}
+
+            <a href="{% url 'login' %}"
+               class="btn btn-outline-light btn-sm">
+
+                Connexion
+
+            </a>
+
+            <a href="{% url 'inscription' %}"
+               class="btn btn-primary btn-sm">
+
+                S'inscrire
+
+            </a>
+
 
         </div>
 
     {% endif %}
-     <form action="{% url 'inscription' %}" method="post">
-                {% csrf_token %}
-
-                <button class="btn btn-danger btn-sm">
-                   S'inscrire
-                </button>
+     
 
 </nav>
 

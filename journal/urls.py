@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AjoutEntry,LesEntrees,ModifierEntry,SupprimerEntry,DetailEntree,Inscription
+from .views import AjoutEntry,LesEntrees,ModifierEntry,SupprimerEntry,DetailEntree,Inscription,MesActivites,Historique
 
 
 urlpatterns = [
@@ -9,6 +9,8 @@ urlpatterns = [
     path('detail/<int:pk>',DetailEntree.as_view() , name='detail_entree'),
     path('<int:pk>/update/',ModifierEntry.as_view() , name='modifier_entree'),
     path('<int:pk>/delete/',SupprimerEntry.as_view() , name='supprimer_entree'),
+    path('mes_activites/',MesActivites.as_view() , name='mes_activites'),
+    path('activites_modifiees/',Historique.as_view() , name='activites_modifiees'),
   
     
     ]

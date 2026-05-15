@@ -41,15 +41,14 @@ class LesEntrees(LoginRequiredMixin,ListView):
      if categorie:
         queryset = queryset.filter(categorie_id=categorie)
 
-     return queryset
+     return queryset.order_by('-date')
  
  
 class  ModifierEntry(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Entry
     template_name = 'modifier_entry.html'
     form_class = EntryForm
-    def get_success_url(self):
-        return reverse('liste_entry',kwargs={'pk':self.object.pk})
+    success_url = reverse_lazy('liste_entry2')
     def test_func(self):
      entry = self.get_object()
      return self.request.user == entry.utilisateur
@@ -76,5 +75,39 @@ class Inscription(CreateView):
     form_class = InscriptionForm
     def get_success_url(self):
        return reverse('login')
+   
+   
+class MesActivites(LoginRequiredMixin,ListView):
+    model = Entry
+    template_name = 'mes_entrees.html'
+    context_object_name = 'mesentrees'
+    paginate_by = 4
+   
+    
+    def get_queryset(self):
 
+        queryset = Entry.objects.filter(utilisateur=self.request.user)
+
+        categorie = self.request.GET.get('categorie')
+
+        if categorie:
+            queryset = queryset.filter(categorie_id=categorie)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Categorie.objects.all()
+        return context
+    
+class Historique(LoginRequiredMixin,ListView):
+    model = Entry
+    template_name = 'historiques_activite.html'
+    context_object_name = 'modifees'
+    
+    def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       context['modifie'] = Entry.objects.all()
+       return context
+   
    
