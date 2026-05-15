@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse,reverse_lazy
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView,DetailView
-from .models import Entry
+from .models import Categorie, Entry
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .forms import EntryForm
+from .forms import EntryForm,InscriptionForm
 
 
 class AjoutEntry(LoginRequiredMixin,CreateView):
@@ -27,7 +27,23 @@ class LesEntrees(LoginRequiredMixin,ListView):
     context_object_name = 'entree'
     paginate_by = 4
     
+    def get_context_data(self, **kwargs):
+     context = super().get_context_data(**kwargs)
+     context['categories'] = Categorie.objects.all()
+     return context
     
+    def get_queryset(self):
+
+     queryset = Entry.objects.all()
+
+     categorie = self.request.GET.get('categorie')
+
+     if categorie:
+        queryset = queryset.filter(categorie_id=categorie)
+
+     return queryset
+ 
+ 
 class  ModifierEntry(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Entry
     template_name = 'modifier_entry.html'
@@ -53,3 +69,12 @@ class DetailEntree(DetailView):
     template_name = 'detail_entree.html'
     context_object_name = 'detail'
     
+    
+class Inscription(CreateView):
+    
+    template_name = 'registration/register.html'
+    form_class = InscriptionForm
+    def get_success_url(self):
+       return reverse('login')
+
+   

@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Categorie,Entry
+from django.contrib.auth.models import User
+from django.contrib import admin
 # Register your models here.
 
 class MesCategories(admin.ModelAdmin):
@@ -14,3 +16,5 @@ class MesEntrees(admin.ModelAdmin):
     search_fields = ['titre']
     list_filter = ['date']
 admin.site.register(Entry,MesEntrees)
+
+
