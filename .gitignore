@@ -1,0 +1,31 @@
+# Environnement virtuel
+venv/
+.env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite
+db.sqlite3
+
+# Fichiers média
+media/
+
+# Fichiers statiques collectés
+staticfiles/
+
+# Variables sensibles
+.env
+
+# VS Code
+
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

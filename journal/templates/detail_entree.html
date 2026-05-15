@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Détail sur l'activité {{detail.titre}}</h1>
+ 
+   
+    <h6>{{detail.utilisateur}}</h6>
+    <p>{{detail.description}}</p>
+    {% if detail.image %}
+    <img src="{{ detail.image.url }}" alt="image activité" width="400">
+    {% endif %}
+   <small>{{detail.date}}</small>
+   
+   {% if user == detail.utilisateur %} 
+   <div class="d-flex gap-2 mt-3">
+    <a href="{% url 'modifier_entree'  detail.id %}" class="btn btn-sm btn-outline-primary">Modifier</a>
+
+
+    <a href="{% url 'supprimer_entree' detail.id %}" class="btn btn-sm btn-outline-danger">Supprimer</a>
+    <a href="{% url 'liste_entry2' %}" class="btn btn-sm btn-light border">Retour</a>
+
+   {% endif %}
+   </div>
+  
+ 
+{% endblock %}
